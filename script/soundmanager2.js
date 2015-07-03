@@ -35,12 +35,7 @@
 "use strict";
 
 if (!window || !window.document) {
-
-  // Don't cross the [environment] streams. SM2 expects to be running in a browser, not under node.js etc.
-  // Additionally, if a browser somehow manages to fail this test, as Egon said: "It would be bad."
-
-  throw new Error('SoundManager requires a browser with window and document objects.');
-
+  return;
 }
 
 var soundManager = null;
@@ -6304,7 +6299,7 @@ if (typeof module === 'object' && module && typeof module.exports === 'object') 
     return {
       constructor: SoundManager,
       getInstance: getInstance
-    }
+    };
   });
 
 }
@@ -6322,4 +6317,4 @@ window.SoundManager = SoundManager;
 // public API, flash callbacks etc.
 window.soundManager = soundManager;
 
-}(window));
+}(typeof window !== 'undefined' ? window : false));
